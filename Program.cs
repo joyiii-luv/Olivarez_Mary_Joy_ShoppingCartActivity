@@ -81,24 +81,57 @@ class Program
                 }
                 else if (choice == 9)
                 {
-                    if (cart.Count != 0) { Console.WriteLine("Cart is Empty :("); continue; }
+                    if (cart.Count == 0) { Console.WriteLine("Cart is Empty :("); continue; }
                     for (int i = 0; i <= cart.Count; i++)
                         Console.WriteLine($"[{i + 1}] {cart[i].Name} (Quantity: {cart[i].Quantity})");
 
                     Console.Write("Select item number to remove");
-                    if (int.TryParse(Console.ReadLine(), int removeIdx))
+                    if (int.TryParse(Console.ReadLine(), out int removeIdx) && removeIdx > 0 && removeIdx <= cart.Count)
                     {
                         var itemToRemove = cart[removeIdx - 1];
                         var prod = products.Find(p => p.Name == itemToRemove.Name);
-                        prod.Remaining_Stock -= itemToRemove.Quantity;
-
+                        prod.Remaining_Stock += itemToRemove.Quantity;
                         cart.RemoveAt(removeIdx - 1);
                         Console.WriteLine("Item successfully removed");
                     }
                     continue;
                 }
+                Product selected = products.Find(p => p.Id == choice);
+                if (selected != null)
+                {
+                    if (selected.Remaining_Stock == 0) { Console.WriteLine("Out of stock!"); continue; }
+
+                    var existingItem = cart.Find(c => c.Name == selected.Name);
+                    if (existingItem == null && cart.Count >= cartLimit)
+                    {
+                        Console.WriteLine("Cart Full!");
+                        continue;
+                    }
+
+                    Console.WriteLine($"Enter quantity for {selected.Name}: ");
+                    if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0 && quantity <= selected.Remaining_Stock)
+                    {
+                        if (existingItem != null)
+                        {
+                            existingItem.Quantity += quantity;
+                            existingItem.Subtotal = existingItem.Quantity * existingItem.Price;
+                        }
+                        else
+                        {
+                            cart.Add(new CartItem { Name = selected.Name, Price = selected.Price, Quantity = quantity, Subtotal = quantity * selected.Price });
+                        }
+                        selected.Remaining_Stock -= quantity;
+                        Console.WriteLine("Added to cart!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid quantity or not enough stock!");
+                    }
 
 
+
+
+                }
             }
         }
     }
