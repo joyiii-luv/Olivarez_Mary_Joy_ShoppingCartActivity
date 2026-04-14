@@ -43,10 +43,9 @@ class Program
 
             if (cart.Count > 0)
             {
-                Console.WriteLine($"\n--- Cart: {cart.Count - 1}/{cartLimit} slots used---");
+                Console.WriteLine($"\n--- Cart: {cart.Count}/{cartLimit} slots used---");
             }
             Console.WriteLine("\nEnter ID to buy | Checkout (0) | Edit Cart (9)");
-
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
                 if (choice == 0)
@@ -54,12 +53,33 @@ class Program
                     if (cart.Count == 0) { Console.WriteLine("Cart is Empty, try again!"); continue; }
 
                     double total = cart.Sum(item => item.Subtotal);
-                    double discount = total > 5000 ? total * 0.05 : 0;
+                    double discount = total > 5000 ? total * 0.10 : 0;
                     double grandTotal = total - discount;
 
                     Console.WriteLine($"\nGrand Total: {grandTotal}");
                     Console.WriteLine("Enter Payment: ");
+                    if (double.TryParse(Console.ReadLine(), out double pay) && pay >= grandTotal)
+                    {
+                        Console.WriteLine("\n======= RECEIPT =======");
+                        Console.WriteLine($" {"ITEM",-15} x{"QUANTITY",5} {"PRICE",8} {"SUBTOTAL",10}");
+
+                        foreach (var item in cart)
+                            Console.WriteLine($" {item.Name,-15} {item.Quantity,5} {item.Price,8} {item.Subtotal,10}");
+
+                        if (discount > 0) Console.WriteLine($"Discount: -{discount}");
+                        Console.WriteLine($"Total Paid: {pay}");
+                        Console.WriteLine($"Change: {pay - grandTotal}");
+                        Console.WriteLine("===== Thank You! Come Again! <3=====\n");
+                        cart.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Insufficient amount. Back to Menu.");
+                        continue;
+                    }
                 }
+            }
         }
     }
 }
