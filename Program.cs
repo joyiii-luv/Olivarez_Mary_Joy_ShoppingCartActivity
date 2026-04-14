@@ -41,7 +41,30 @@ class Program
 
             Console.WriteLine("============================");
 
-            
+            if (cart.Count > 0)
+            {
+                Console.WriteLine($"\n--- Cart: {cart.Count - 1}/{cartLimit} slots used---");
+            }
+            Console.WriteLine("\nEnter ID to buy | Checkout (0) | Edit Cart (9)");
+
+            if (int.TryParse(Console.ReadLine(), out int choice))
+            {
+                if (choice == 0)
+                {
+                    if (cart.Count == 0) { Console.WriteLine("Cart is Empty, try again!"); continue; }
+
+                    double total = cart.Sum(item => item.Subtotal);
+                    double discount = total > 5000 ? total * 0.05 : 0;
+                    double grandTotal = total - discount;
+
+                    Console.WriteLine($"\nGrand Total: {grandTotal}");
+                    Console.WriteLine("Enter Payment: ");
+                }
+        }
+    }
+}
+
+
 
 
 
