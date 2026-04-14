@@ -127,11 +127,16 @@ class Program
                     {
                         Console.WriteLine("Invalid quantity or not enough stock!");
                     }
-
-
-
-
                 }
+                else
+                {
+                    Console.WriteLine("Invalid ID!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input! Please enter a number.");
+                return;
             }
         }
     }
