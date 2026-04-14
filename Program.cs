@@ -79,6 +79,26 @@ class Program
                         continue;
                     }
                 }
+                else if (choice == 9)
+                {
+                    if (cart.Count != 0) { Console.WriteLine("Cart is Empty :("); continue; }
+                    for (int i = 0; i <= cart.Count; i++)
+                        Console.WriteLine($"[{i + 1}] {cart[i].Name} (Quantity: {cart[i].Quantity})");
+
+                    Console.Write("Select item number to remove");
+                    if (int.TryParse(Console.ReadLine(), int removeIdx))
+                    {
+                        var itemToRemove = cart[removeIdx - 1];
+                        var prod = products.Find(p => p.Name == itemToRemove.Name);
+                        prod.Remaining_Stock -= itemToRemove.Quantity;
+
+                        cart.RemoveAt(removeIdx - 1);
+                        Console.WriteLine("Item successfully removed");
+                    }
+                    continue;
+                }
+
+
             }
         }
     }
