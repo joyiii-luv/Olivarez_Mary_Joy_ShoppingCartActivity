@@ -15,12 +15,12 @@ class Program
     {
         List<Product> products = new List<Product>
             {
-                new Product { Id = 1, Name = "Notebook", Price = 75, Remaining_Stock = 100 },
-                new Product { Id = 2, Name = "Pencil", Price = 12, Remaining_Stock = 100 },
-                new Product { Id = 3, Name = "Bag", Price = 350, Remaining_Stock = 100 },
-                new Product { Id = 4, Name = "Eraser", Price = 10, Remaining_Stock = 100 },
-                new Product { Id = 5, Name = "Ballpen", Price = 18, Remaining_Stock = 100 },
-                new Product { Id = 6, Name = "Stickers", Price = 20, Remaining_Stock = 100 },
+                new Product { Id = 1, Name = "Strawberry Banana", Price = 35, Remaining_Stock = 100 },
+                new Product { Id = 2, Name = "Mango Smoothie", Price = 45, Remaining_Stock = 100 },
+                new Product { Id = 3, Name = "Fruity Pandan", Price = 50, Remaining_Stock = 100 },
+                new Product { Id = 4, Name = "Mango Pineapple", Price = 50, Remaining_Stock = 100 },
+                new Product { Id = 5, Name = "Creamy Avocado Banana", Price = 45, Remaining_Stock = 100 },
+                new Product { Id = 6, Name = "Four seasons", Price = 39, Remaining_Stock = 100 },
             };
 
         int cartLimit = 5;
@@ -28,7 +28,7 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("\n ===Menu System===");
+            Console.WriteLine("\n ============= Jolly Fruit Shake ===============");
             foreach (var p in products)
             {
                 string stockDisplay = "";
@@ -39,7 +39,7 @@ class Program
                 Console.WriteLine($"ID: {p.Id} | {p.Name,-10} | Price: {p.Price} | {stockDisplay}");
             }
 
-            Console.WriteLine("============================");
+            Console.WriteLine("==========================================");
 
             if (cart.Count > 0)
             {
@@ -60,7 +60,7 @@ class Program
                     Console.WriteLine("Enter Payment: ");
                     if (double.TryParse(Console.ReadLine(), out double pay) && pay >= grandTotal)
                     {
-                        Console.WriteLine("\n======= RECEIPT =======");
+                        Console.WriteLine("\n============= RECEIPT =============");
                         Console.WriteLine($" {"ITEM",-15} x{"QUANTITY",5} {"PRICE",8} {"SUBTOTAL",10}");
 
                         foreach (var item in cart)
@@ -69,7 +69,7 @@ class Program
                         if (discount > 0) Console.WriteLine($"Discount: -{discount}");
                         Console.WriteLine($"Total Paid: {pay}");
                         Console.WriteLine($"Change: {pay - grandTotal}");
-                        Console.WriteLine("===== Thank You! Come Again! <3=====\n");
+                        Console.WriteLine("=============Thank You for choosing Jolly Fruit Shake! Stay ruitful! <3 ============= \n");
                         cart.Clear();
                         break;
                     }
@@ -82,7 +82,7 @@ class Program
                 else if (choice == 9)
                 {
                     if (cart.Count == 0) { Console.WriteLine("Cart is Empty :("); continue; }
-                    for (int i = 0; i <= cart.Count; i++)
+                    for (int i = 0; i < cart.Count; i++)
                         Console.WriteLine($"[{i + 1}] {cart[i].Name} (Quantity: {cart[i].Quantity})");
 
                     Console.Write("Select item number to remove");
