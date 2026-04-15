@@ -1,8 +1,8 @@
 # Olivarez_Mary_Joy_ShoppingCartActivity
 
-## //Welcome to my GitHub!
+## Welcome to my GitHub!
 
-# Project Overview:  Jolly Fruit Shake Store
+## Project Overview:  Jolly Fruit Shake Store
 
 ​The Jolly Fruit Shake Store is a C# console-based shopping cart system designed to manage inventory  
 and process customer orders for a variety of fruit shakes. The application allows users to browse a menu featuring flavors such as Strawberry Banana, Creamy Avocado Banana, Fruity Pandan, Mango Smoothie, Mango Pineapple, and Four Seasons while maintaining real-time stock levels.  
@@ -23,11 +23,11 @@ and process customer orders for a variety of fruit shakes. The application allow
 
 ## AI USAGE EXPLANATION
 
-### Which parts of the project did you use AI for (if any)**
+### Which parts of the project did you use AI for (if any)
 
 I used AI to make some polishing to my code, especially to some important syntax like Discount, Cart Removal, and Stock Validation. I also made some prompts in order to debug and guide me on how I can make such difficult code.
 
-### Why did you use AI in those parts?**
+### Why did you use AI in those parts?
 
 I used AI in the process of my coding, generally only to debug certain errors in my program. It was hard for me to debug it on my own without prior knowledge of the suitable syntax that I could use.
 One of these is the discount that gave me so much hard time making and formulating its process, and being confused between double and int usage.  
