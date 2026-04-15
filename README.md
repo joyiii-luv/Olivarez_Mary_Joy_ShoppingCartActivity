@@ -19,8 +19,7 @@ and process customer orders for a variety of fruit shakes. The application allow
 - ​Documentation & Compliance
 
 **Flow Chart**
-//Note: I don't know how to put image here, that's why here's the link :)  
-![Description](https://canva.link/mbxudujxdtym6h5)  
+<img width="1587" height="2245" alt="Image" src="https://github.com/user-attachments/assets/dd59e259-a1e7-42eb-bac0-90ea2eda1119" />
 
 
 **AI USAGE EXPLANATION**
