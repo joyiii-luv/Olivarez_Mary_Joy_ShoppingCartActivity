@@ -1,8 +1,8 @@
 # Olivarez_Mary_Joy_ShoppingCartActivity
 
-//Welcome to my GitHub!
-
-Project Overview:  Jolly Fruit Shake Store
+//Welcome to my GitHub! 
+ 
+# Project Overview:  Jolly Fruit Shake Store
 
 ​The Jolly Fruit Shake Store is a C# console-based shopping cart system designed to manage inventory  
 and process customer orders for a variety of fruit shakes. The application allows users to browse a menu featuring flavors such as Strawberry Banana, Creamy Avocado Banana, Fruity Pandan, Mango Smoothie, Mango Pineapple and Four Seasons while maintaining real-time stock levels.  
@@ -18,17 +18,17 @@ and process customer orders for a variety of fruit shakes. The application allow
 - Automated Reporting
 - ​Documentation & Compliance
 
-**Flow Chart**
+## Flow Chart
 <img width="1587" height="2245" alt="Image" src="https://github.com/user-attachments/assets/dd59e259-a1e7-42eb-bac0-90ea2eda1119" />
 
 
-**AI USAGE EXPLANATION**
+## AI USAGE EXPLANATION
 
-**Which parts of the project did you use AI for (if any)**
+## Which parts of the project did you use AI for (if any)
 
 I used AI to make some polishing to my code, especially to some important syntax like Discount, Cart Removal, and Stock Validation. I also made some prompts in order to debug and guide me on how I can make such difficult code.
 
-**Why did you use AI in those parts?**
+### Why did you use AI in those parts?
 
 I used AI in the process of my coding, generally only to debug certain errors in my program. It was hard for me to debug it on my own without prior knowledge of the suitable syntax that I could use.
 One of these is the discount that gave me so much hard time making and formulating its process, and being confused between double and int usage.  
@@ -38,7 +38,7 @@ Additionally, for stock validation, AI helped me to debug the errors and missing
  
 Moreover, AI suggests and debugs my code in order for it to work and flow in an easy way. And even though I used AI on some parts, I can guarantee that I learned and made some improvements in my coding skills. 
 
-**What prompts/questions did you ask?**
+### What prompts/questions did you ask?
 
 Prompt that I used for debugging my code:
 
@@ -50,10 +50,11 @@ Prompt that I used for discount:
 Prompt that I used for stock validation:
 “View this image, debug and guide me on how I can make stock validation and use some coding techniques.”
 
-**What changed or improved after using AI?**
+### What changed or improved after using AI?
 
 Using AI has made me become aware of various missing syntax that I forgot to include, such as curly braces, semicolons, the significance of indentations, and keywords that AI recommends I use. Additionally, it reduced the number of lines in my code by avoiding redundant code. 
 
+### I took this project very seriously, and I learned and understood the lessons that this activity provided. Additionally, AI was used only for debugging, providing coding guidance, and clarifying contexts, and it did not fully replicate the written code.
 
 
 
