@@ -1,7 +1,7 @@
 ﻿
 using Olivarez_Mary_Joy_ShoppingCartActivity;
 
-internal class CartItem
+class CartItem
 {
     public string Name { get; set; } = string.Empty;
     public int Price { get; set; }

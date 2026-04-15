@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Olivarez_Mary_Joy_ShoppingCartActivity
 { 
-    internal class Product
+    class Product
     {
         //hii
 
