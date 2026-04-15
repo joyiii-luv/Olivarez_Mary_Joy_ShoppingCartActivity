@@ -69,9 +69,18 @@ class Program
                         if (discount > 0) Console.WriteLine($"Discount: -{discount}");
                         Console.WriteLine($"Total Paid: {pay}");
                         Console.WriteLine($"Change: {pay - grandTotal}");
-                        Console.WriteLine("=============Thank You for choosing Jolly Fruit Shake! Stay ruitful! <3 ============= \n");
-                        cart.Clear();
-                        break;
+                        Console.WriteLine("=============Thank You for choosing Jolly Fruit Shake! Stay Fruitful! <3 ============= \n");
+                        Console.WriteLine("Continue to Order? : Yes(1) | No(0)");
+                        string input = Console.ReadLine();
+                        if (input == "0")
+                        {
+                            break;
+                        }
+                        else if (input == "1");
+                        {
+                            cart.Clear(); 
+                            continue;     
+                        }
                     }
                     else
                     {
@@ -136,7 +145,7 @@ class Program
             else
             {
                 Console.WriteLine("Invalid Input! Please enter a number.");
-                return;
+                continue;
             }
         }
     }
