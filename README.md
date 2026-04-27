@@ -3,9 +3,9 @@
 # Project Overview:  Jolly Fruit Shake Store
 
 ​The Jolly Fruit Shake Store is a C# console-based shopping cart system designed to manage inventory  
-and process customer orders for a variety of fruit shakes. The application allows users to browse a menu featuring flavors such as Strawberry Banana, Creamy Avocado Banana, Fruity Pandan, Mango Smoothie, Mango Pineapple and Four Seasons while maintaining real-time stock levels.  
+and process customer orders for a variety of fruit shakes. The application allows users to browse a menu featuring flavors such as Strawberry Banana, Creamy Avocado Banana, Fruity Pandan, Mango Smoothie, Mango Pineapple, and Four Seasons while maintaining real-time stock levels.  
 
-​Key System Functionalities
+​## Key System Functionalities
 
 - Inventory Management
 - Interactive Menu
@@ -19,6 +19,7 @@ and process customer orders for a variety of fruit shakes. The application allow
 ## Flow Chart
 <img width="1587" height="2245" alt="Image" src="https://github.com/user-attachments/assets/dd59e259-a1e7-42eb-bac0-90ea2eda1119" />
 
+## AI USAGE EXPLANATION
 
 ## AI USAGE EXPLANATION
 
