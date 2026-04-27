@@ -33,16 +33,21 @@ Moreover, AI suggests and debugs my code in order for it to work and flow in an 
 
 ### What prompts/questions did you ask?
 
+### What prompts/questions did you ask?
+
 1. Debugging prompts:
 
 “Debug this code without changing the entire code, give only ideas for me to improve some errors.”
 "Debug this code" 
 
+2. Discount prompts: “View this image, debug and guide me on how I can make a discount and use some coding techniques.”
 
+3. Stock validation prompts: “View this image, debug and guide me on how I can make stock validation and use some coding techniques.” "How do I fix this stock validation?"
+
+### What changed or Improved after using AI?
+Using AI has made me become aware of various missing syntax that I forgot to include, such as curly braces, semicolons, the significance of indentations, and keywords that AI recommends I use. Additionally, it reduced the number of lines in my code by avoiding redundant code.### Conclusion
+
+###	Conclusion
 AI was used only for debugging, providing coding guidance, and clarifying contexts, and did not fully replicate the written code. At the end of this quiz, I was able to address my missing syntax, errors, missing methods, array adjustments, and GitHub experience. With that in mind, I can say that I am satisfied with the outcome of my project, and I am grateful for the learning experience that this activity provided.
-### Conclusion
 
-I took this project very seriously, and I learned and understood the lessons that this activity provided. Additionally, AI was used only for debugging, providing coding guidance, and clarifying contexts, and it did not fully replicate the written code.
-
-
-AI was used only for debugging, providing coding guidance, and clarifying contexts, and did not fully replicate the written code. At the end of this quiz, I was able to address my missing syntax, errors, missing methods, array adjustments, and GitHub experience. With that in mind, I can say that I am satisfied with the outcome of my project, and I am grateful for the learning experience that this activity provided.
+### Mary Joy Olivarez | BSIT 1-2 | QUIZ PART 1 
