@@ -1,6 +1,4 @@
 # Olivarez_Mary_Joy_ShoppingCartActivity
-
-//Welcome to my GitHub! 
  
 # Project Overview:  Jolly Fruit Shake Store
 
