@@ -21,8 +21,6 @@ and process customer orders for a variety of fruit shakes. The application allow
 
 ## AI USAGE EXPLANATION
 
-## AI USAGE EXPLANATION
-
 ## Which parts of the project did you use AI for (if any)
 
 I used AI to make some polishing to my code, especially to some important syntax like Discount, Cart Removal, and Stock Validation. I also made some prompts in order to debug and guide me on how I can make such difficult code like implementing methods.
