@@ -7,6 +7,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        //To add Peso Sign
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+
         Product[] product = new Product[8];
         {
             product[0] = new Product { Id = 1, Name = "Strawberry Banana", Price = 135, RemainingStock = 100 };
@@ -125,7 +129,9 @@ class Program
                     CartItem? existingItem = Array.Find(cart, c => c != null && c.Name == selected.Name);
 
                     Console.Write($"Enter quantity for {selected.Name}: ");
-                    if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0)
+                    string qtyInput = Console.ReadLine();
+
+                    if (int.TryParse(qtyInput, out int quantity) && quantity > 0)
                     {
                         // METHOD: HasEnoughStock
                         if (selected.HasEnoughStock(quantity))
@@ -164,9 +170,17 @@ class Program
                     }
                     else
                     {
-                        Console.WriteLine("Invalid ID!");
+                        Console.WriteLine("Invalid Input, please enter a number for quantity.");
                     }
                 }
+                else
+                {
+                    Console.WriteLine("Invalid Product ID, try again.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input, please enter a number.");
             }
         }
     }

@@ -15,15 +15,10 @@ and process customer orders for a variety of fruit shakes. The application allow
 - Transaction Processing
 - Automated Reporting
 - ​Documentation & Compliance
-
-## Flow Chart
-<img width="1587" height="2245" alt="Image" src="https://github.com/user-attachments/assets/dd59e259-a1e7-42eb-bac0-90ea2eda1119" />
-
+- 
 ## AI USAGE EXPLANATION
 
-## AI USAGE EXPLANATION
-
-## Which parts of the project did you use AI for (if any)
+### Which parts of the project did you use AI for (if any)
 
 I used AI to make some polishing to my code, especially to some important syntax like Discount, Cart Removal, and Stock Validation. I also made some prompts in order to debug and guide me on how I can make such difficult code like implementing methods.
 
@@ -56,5 +51,8 @@ Moreover, AI suggests and debugs my code in order for it to work and flow in an 
 Using AI has made me become aware of various missing syntax that I forgot to include, such as curly braces, semicolons, the significance of indentations, and keywords that AI recommends I use. Additionally, it reduced the number of lines in my code by avoiding redundant code. 
 
 ### Conclusion
+
+I took this project very seriously, and I learned and understood the lessons that this activity provided. Additionally, AI was used only for debugging, providing coding guidance, and clarifying contexts, and it did not fully replicate the written code.
+
 
 AI was used only for debugging, providing coding guidance, and clarifying contexts, and did not fully replicate the written code. At the end of this quiz, I was able to address my missing syntax, errors, missing methods, array adjustments, and GitHub experience. With that in mind, I can say that I am satisfied with the outcome of my project, and I am grateful for the learning experience that this activity provided.
