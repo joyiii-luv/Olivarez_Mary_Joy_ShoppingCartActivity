@@ -17,14 +17,9 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
         public int RemainingStock { get; set; }
 
         // Display Product 
-        public void DisplayProduct()
-        {
-            string stockDisplay = RemainingStock == 0 ? "*** OUT OF STOCK ***" :
-                                 RemainingStock <= 10 ? $"Stock: {RemainingStock} <<< LOW STOCK" :
-                                 $"Stock: {RemainingStock}";
-
+        public void DisplayProduct() =>
             Console.WriteLine($"ID: {Id} | {Name,-20} | Price: \u20B1{Price:N2} | {stockDisplay}");
-        }
+        
 
         // Stock Validations
         public bool HasEnoughStock(int quantity) => quantity <= RemainingStock;

@@ -7,7 +7,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        //To add Peso Sign
+        //To add Peso Sign*
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 
@@ -16,11 +16,11 @@ class Program
             product[0] = new Product { Id = 1, Name = "Strawberry Banana", Price = 135, RemainingStock = 100 };
             product[1] = new Product { Id = 2, Name = "Mango Smoothie", Price = 150, RemainingStock = 100 };
             product[2] = new Product { Id = 3, Name = "Fruity Pandan", Price = 143, RemainingStock = 100 };
-            product[3] = new Product { Id = 4, Name = "Mango Pineapple", Price = 50, RemainingStock = 100 };
-            product[4] = new Product { Id = 5, Name = "Creamy Avocado Banana", Price = 45, RemainingStock = 100 };
-            product[5] = new Product { Id = 6, Name = "Four seasons", Price = 39, RemainingStock = 100 };
-            product[6] = new Product { Id = 7, Name = "Strawberry Kiwi", Price = 40, RemainingStock = 100 };
-            product[7] = new Product { Id = 8, Name = "Mango Melon", Price = 40, RemainingStock = 100 };
+            product[3] = new Product { Id = 4, Name = "Mango Pineapple", Price = 150, RemainingStock = 100 };
+            product[4] = new Product { Id = 5, Name = "Creamy Avocado Banana", Price = 125, RemainingStock = 100 };
+            product[5] = new Product { Id = 6, Name = "Four seasons", Price = 149, RemainingStock = 100 };
+            product[6] = new Product { Id = 7, Name = "Strawberry Kiwi", Price = 130, RemainingStock = 100 };
+            product[7] = new Product { Id = 8, Name = "Sweet Melon", Price = 130, RemainingStock = 100 };
         }
 
         int cartLimit = 5;
@@ -30,72 +30,77 @@ class Program
         while (true)
         {
             Console.WriteLine("\n ============= Jolly Fruit Shake ===============");
-            foreach (var p in product)
-            {
-                if (p != null) p.DisplayProduct();
-            }
+            Console.WriteLine("IDs 1-8. Buy | 9. Cart Management | 0. Checkout");
+            Console.WriteLine("10. Search   | 11. Category Filter | 12. History");
             Console.WriteLine("==========================================");
 
-            if (cartCount > 0)
-            {
-                Console.WriteLine($"\n--- Cart: {cartCount}/{cartLimit} slots used ---");
-            }
-            Console.WriteLine("\nEnter ID to buy | Checkout (0) | Edit Cart (9)");
+            foreach (var p in product) if (p != null) p.DisplayProduct();
 
+            Console.Write("\nEnter Choice: ");
             if (int.TryParse(Console.ReadLine(), out int choice))
             {
-                if (choice == 0) // Checkout Logic
+                if (choice == 0) // Checkout Validation
                 {
                     if (cartCount == 0) { Console.WriteLine("Cart is Empty, try again!"); continue; }
 
                     double originalTotal = 0;
-                    for (int i = 0; i < cartCount; i++)
-                    {
-                        originalTotal += cart[i].Subtotal;
-                    }
-
-                    double discountAmount = originalTotal >= 5000? 0.10 * originalTotal : 0;
+                    for (int i = 0; i < cartCount; i++) originalTotal += cart [i] .Subtotal;
+                    double discountAmount = originalTotal >= 5000 ? 0.10 * originalTotal : 0;
                     double finalTotal = originalTotal - discountAmount;
 
-                    Console.WriteLine($"\nSubtotal: {originalTotal:N2}");
-                    if (discountAmount > 0) Console.WriteLine($"Discount Applied: -{discountAmount:N2}");
                     Console.WriteLine($"GRAND TOTAL: {finalTotal:N2}");
 
-                    Console.Write("Enter Payment: ");
-                    if (double.TryParse(Console.ReadLine(), out double pay) && pay >= finalTotal)
+                    double pay = 0;
+                    //Payment Validation Loop
+
+                    while (true)
                     {
-                        Console.WriteLine("\n============= RECEIPT =============");
-                        Console.WriteLine($"{"ITEM",-20} {"QTY",5} {"SUBTOTAL",10}");
-                        for (int i = 0; i < cartCount; i++)
+                        Console.Write("Enter Payment: ");
+                        if (double.TryParse(Console.ReadLine(), out pay))
                         {
-                            Console.WriteLine($"{cart[i].Name,-20} {cart[i].Quantity,5} {cart[i].Subtotal,10:N2}");
+                            if (pay >= finalTotal) break;
+                            else Console.WriteLine($"Insufficient amount! You need ₱{finalTotal - pay:N2} more.");
                         }
-                        Console.WriteLine("-----------------------------------");
-                        Console.WriteLine($"Original Total: {originalTotal,10:N2}");
-                        Console.WriteLine($"Discount:       -{discountAmount,10:N2}");
-                        Console.WriteLine($"Grand Total:    {finalTotal,10:N2}");
-                        Console.WriteLine("-----------------------------------");
-
-                        Console.WriteLine($"Amount Paid:     {pay,10:N2}");
-                        Console.WriteLine($"Change:          {pay - finalTotal,10:N2}");
-                        Console.WriteLine("\n===Thank You for choosing JFS! Stay Fruitful! ===\n");
-
-                        Console.WriteLine("Continue to Order? : Yes(1) | No(0)");
-                        if (Console.ReadLine() == "0") break;
-
-                        Array.Clear(cart, 0, cart.Length);
-                        cartCount = 0;
-                        continue;
+                        else Console.WriteLine("Invalid input, please enter a valid number for payment.");
                     }
-                    else
+                        // Receipt Generation
+                    Console.WriteLine("\n============= RECEIPT =============");
+                    Console.WriteLine($"{"ITEM",-20} {"QTY",5} {"SUBTOTAL",10}");
+                    for (int i = 0; i < cartCount; i++)
+                        Console.WriteLine($"{cart[i].Name,-20} {cart[i].Quantity,5} ₱{cart[i].Subtotal,10:N2}");
+
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine($"Original Total: {originalTotal,10:N2}");
+                    Console.WriteLine($"Discount:       -{discountAmount,10:N2}");
+                    Console.WriteLine($"Grand Total:    {finalTotal,10:N2}");
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine($"Amount Paid:     {pay,10:N2}");
+                    Console.WriteLine($"Change:          {pay - finalTotal,10:N2}");
+                    Console.WriteLine("\n===Thank You for choosing JFS! Stay Fruitful! ===\n");
+
+                    // FEATURE 4: Stock Reorder Alert (Check RemainingStock <= 5)
+                    Console.WriteLine("---LOW STOCK ALERT---");
+                    foreach (var p in product)
+                        if (p.RemainingStock <= 5) Console.WriteLine($"ALERT: {p.Name} has only {p.RemainingStock} left! Sorry :(");
+
+                    string cont;
+                    while(true)
                     {
-                        Console.WriteLine("Insufficient amount. Back to Menu.");
-                        continue;
+                        Console.WriteLine("Continue to Order? : Y/N");
+                        cont = Console.ReadLine()?.ToUpper() ?? "";
+                        if (cont == "Y" || cont == "N") break;
+                        else Console.WriteLine("Invalid input, please enter Y for Yes or N for No.");
                     }
+
+                    if (cont == "N") break;
+
+                    Array.Clear(cart, 0, cart.Length);
+                    cartCount = 0;
+                   
                 }
-                else if (choice == 9) // Edit Cart Logic
+                else if (choice == 8) // Edit Cart Logic
                 {
-                    if (cartCount == 0) { Console.WriteLine("Cart is Empty :("); continue; }
+                    if (cartCount == 0) { Console.WriteLine("Cart is Empty :("); continue; }  
                     for (int i = 0; i < cartCount; i++)
                         Console.WriteLine($"[{i + 1}] {cart[i].Name} (Quantity: {cart[i].Quantity})");
 
