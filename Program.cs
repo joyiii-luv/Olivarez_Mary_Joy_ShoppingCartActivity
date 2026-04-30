@@ -230,6 +230,11 @@ class Program
                                 Console.WriteLine($"Insufficient stock! Only {sel.RemainingStock} left.");
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("Invalid input, please enter a number corresponding to the options.");
+                        }
+
                     }
                 }
                 else
