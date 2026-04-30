@@ -27,6 +27,8 @@ Moreover, AI suggests and debugs my code in order for it to work and flow in an 
 
 ### What prompts/questions did you ask?
 
+### What prompts/questions did you ask?
+
 1. Debugging prompts:
 “Debug this code without changing the entire code, give only ideas for me to improve some errors.” "Debug this code"
 
