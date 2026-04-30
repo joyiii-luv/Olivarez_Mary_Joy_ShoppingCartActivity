@@ -5,7 +5,7 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main(string[] args )
     {
         //To add Peso Sign*
         Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -63,6 +63,8 @@ class Program
                         }
                         else Console.WriteLine("Invalid input, please enter a valid number for payment.");
                     }
+
+
                     // Receipt Generation
                     Console.WriteLine("\n============= RECEIPT =============");
                     Console.WriteLine($"Receipt No: ");
@@ -80,8 +82,7 @@ class Program
                     Console.WriteLine($"Change:          {pay - finalTotal,10:N2}");
                     Console.WriteLine("\n===Thank You for choosing JFS! Stay Fruitful! ===\n");
 
-                   
-
+                    
                     // FEATURE 4: Stock Reorder Alert (Check RemainingStock <= 5)
                     Console.WriteLine("---LOW STOCK ALERT---");
                     foreach (var p in product)
@@ -102,6 +103,10 @@ class Program
                     cartCount = 0;
 
                 }
+                else if (choice == 9) // Cart Management
+                {
+                    ManageCart(ref cart, ref cartCount, product);
+                }
                 else if (choice == 10) // Search by Name
                 {
                     Console.WriteLine("Enter product name to search: ");
@@ -117,13 +122,13 @@ class Program
                 else // Buy  
                 {
                     Product sel = Array.Find(product, p => p != null && p.Id == choice);
-                    if (sel != null && sel.RemainingStock > 0 )
+                    if (sel != null && sel.RemainingStock > 0)
                     {
                         Console.Write($"Enter quantity for {sel.Name}: ");
                         if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0)
                         {
                             if (sel.HasEnoughStock(quantity))
-                            {   
+                            {
                                 CartItem? exist = Array.Find(cart, c => c != null && c.Name == sel.Name);
                                 if (exist != null)
                                 {
@@ -151,8 +156,90 @@ class Program
                         else Console.WriteLine("Invalid Input, please enter a number for quantity.");
                     }
                 }
-
             }
+        }
+    }
+
+    static void ManageCart (ref CartItem[] cart, ref int count, Product[] products)
+    {
+        if (count == 0) { Console.WriteLine("Cart is Empty, try again!"); return; }
+        while (true)
+        {
+            Console.WriteLine("\n--- Manage Cart ---");
+            for (int i = 0; i < count; i++) Console.WriteLine($"[{i + 1}] {cart[i].Name} x {cart[i].Quantity}");
+            Console.WriteLine("1. View Cart | 2. Remove | 3. Update Quantity | 4. Clear Cart | 5. Back");
+            Console.Write("Choice: ");
+            string op = Console.ReadLine();
+
+            if (op == "1")
+            {
+                Console.WriteLine("\n---Your Cart---");
+                for (int i = 0; i < count; i++)
+                    Console.WriteLine($"{cart[i].Name} x {cart[i].Quantity} = ₱{cart[i].Subtotal:N2}");
+            }
+            else if (op == "2")
+            {
+                Console.Write("Enter item number to remove: ");
+                if (int.TryParse(Console.ReadLine(), out int rem) && rem > 0 && rem <= count)
+                {
+                    CartItem removed = cart[rem - 1];
+                    Product prod = Array.Find(products, p => p.Name == removed.Name);
+                    if (prod != null) prod.RemainingStock += removed.Quantity;
+                    for (int i = rem - 1; i < count - 1; i++) cart[i] = cart[i + 1];
+                    cart[count - 1] = null;
+                    count--;
+                    Console.WriteLine("Item removed.");
+                }
+                else Console.WriteLine("Invalid input.");
+            }
+            else if (op == "3")
+            {
+                Console.Write("Enter item number to update: ");
+                if (int.TryParse(Console.ReadLine(), out int upd) && upd > 0 && upd <= count)
+                {
+                    CartItem item = cart[upd - 1];
+                    Product prod = Array.Find(products, p => p.Name == item.Name);
+                    if (prod != null)
+                    {
+                        Console.Write($"Enter new quantity for {item.Name}: ");
+                        if (int.TryParse(Console.ReadLine(), out int newQty) && newQty >= 0)
+                        {
+                            int diff = newQty - item.Quantity;
+                            if (diff == 0) continue;
+                            else if (diff > 0 && prod.HasEnoughStock(diff))
+                            {
+                                item.Quantity = newQty;
+                                item.Subtotal = prod.GetItemTotal(newQty);
+                                prod.DeductStock(diff);
+                                Console.WriteLine("Quantity updated.");
+                            }
+                            else if (diff < 0)
+                            {
+                                item.Quantity = newQty;
+                                item.Subtotal = prod.GetItemTotal(newQty);
+                                prod.RemainingStock += (-diff);
+                                Console.WriteLine("Quantity updated.");
+                            }
+                            else Console.WriteLine("Not enough stock available.");
+                        }
+                        else Console.WriteLine("Invalid input for quantity.");
+                    }
+                }
+                else Console.WriteLine("Invalid input, try again");
+            }
+            else if (op == "4")
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    var p = Array.Find(products, prod => prod.Name == cart[i].Name);
+                    if (p != null) p.RemainingStock += cart[i].Quantity;
+                }
+                Array.Clear(cart, 0, cart.Length);
+                count = 0;
+                Console.WriteLine("Cart cleared.");
+                break;
+            }
+            else if (op == "4") break;
         }
     }
 }
