@@ -12,13 +12,14 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
     public class Product
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = "";
         public double Price { get; set; }
         public int RemainingStock { get; set; }
+        public string Category { get; set; } = "";
 
         // Display Product 
         public void DisplayProduct() =>
-            Console.WriteLine($"ID: {Id} | {Name,-20} | Price: \u20B1{Price:N2} | {stockDisplay}");
+            Console.WriteLine($"ID: {Id} | {Name,-20} | Price: \u20B1{Price:N2} | Stock: {RemainingStock} | [{Category}]");
         
 
         // Stock Validations
@@ -34,7 +35,7 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
     // CartItem Class
     public class CartItem
     {
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = "";
         public double Price { get; set; }
         public int Quantity { get; set; }
         public double Subtotal { get; set; }
