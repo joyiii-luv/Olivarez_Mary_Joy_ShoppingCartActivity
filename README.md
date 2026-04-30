@@ -21,11 +21,9 @@ I used AI to make some polishing to my code, especially to some important syntax
 
 ### Why did you use AI in those parts?
 
-I used AI in the process of my coding, generally only to debug certain errors in my program. It was hard for me to debug it on my own without prior knowledge of the suitable syntax that I could use.
-One of these is the discount that gave me so much hard time making and formulating its process, and being confused between double and int usage. The way I revise and add the missing methods in product.cs, and adding enhanced code in program.cs, was all guided by AI. It also helped me to understand the context of the discount and how it works in a shopping cart system.
-The same goes for the cart removal part; it was hard for me to identify what the steps are for how the cart typically shows and processes input using the formulated code. The reason why i used AI for this part is that I was confused on how to make the cart removal process work, and I had a hard time understanding the context of it. By clarifying the context and providing me with the suitable code, AI helped me to understand how the cart removal process works and how to implement it in my program.
+I used only AI to debug specific program bugs when I was coding. Without knowing the appropriate syntax beforehand, it was difficult for me to debug it on my own. One of these is the discount, which made it highly challenging for me to create and formulate its procedure and to distinguish between double and int usage. It served as my guidance when I revised and added the missing methods in product.cs and improved the code in program.cs. It also made it easier for me to comprehend the discount's context and how a shopping cart system operates.larifying the context and providing me with the suitable code, AI helped me to understand how the cart removal process works and how to implement it in my program.
 
-Moreover, AI suggests and debugs my code in order for it to work and flow in an easy way. And even though I used AI on some parts, I can guarantee that I learned and made some improvements in my coding skills.
+Moreover, AI suggests and debugs my code in order for it to work and flow in an easy way. And even though I used AI on some parts, I can guarantee that I learned and made some improvements in my coding skills. 
 
 ### What prompts/questions did you ask?
 
@@ -40,6 +38,10 @@ Moreover, AI suggests and debugs my code in order for it to work and flow in an 
 
 4. Updating Product prompt:
 "How to update a product in the inventory?"
+
+5. Github clarification prompt:
+"How to add image in GitHub README.md?"
+"How to add image in GitHub Pull Request?"
 
 What changed or Improved after using AI?
 Using AI has made me become aware of various missing syntax that I forgot to include, such as curly braces, semicolons, the significance of indentations, and keywords that AI recommends I use. Additionally, it reduced the number of lines in my code by avoiding redundant code.
