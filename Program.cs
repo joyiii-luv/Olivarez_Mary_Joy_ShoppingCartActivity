@@ -9,7 +9,7 @@ class Program
     static string[] orderHistory = new string[100];
     static int historyCount = 0;
     static int receiptCounter = 1;
-    static void Main(string[] args )
+    static void Main()
     {
         //To add Peso Sign*
         Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -17,14 +17,14 @@ class Program
 
         Product[] product = new Product[8];
         {
-            product[0] = new Product { Id = 1, Name = "Creamy Avocado", Price = 265, RemainingStock = 100, Category = "Specialty" };
-            product[1] = new Product { Id = 2, Name = "Fruity Pandan", Price = 289, RemainingStock = 100, Category = "Specialty" };
-            product[2] = new Product { Id = 3, Name = "Strawberry Banana", Price = 240, RemainingStock = 100, Category = "Specialty" };
-            product[3] = new Product { Id = 4, Name = "Mango Smoothie", Price = 175, RemainingStock = 100, Category = "Smoothie" };
-            product[4] = new Product { Id = 5, Name = "Mango Pineapple", Price = 160, RemainingStock = 100, Category = "Smoothie" };
-            product[5] = new Product { Id = 6, Name = "Four seasons", Price = 100, RemainingStock = 100, Category = "Juice" };
-            product[6] = new Product { Id = 7, Name = "Strawberry Kiwi", Price = 120, RemainingStock = 100, Category = "Juice" };
-            product[7] = new Product { Id = 8, Name = "Sweet Melon", Price = 130, RemainingStock = 100, Category = "Juice" };
+            product[0] = new Product(1, "Creamy Avocado", 265, 100, "Specialty");
+            product[1] = new Product(2, "Fruity Pandan", 289, 100, "Specialty");
+            product[2] = new Product(3, "Strawberry Banana", 240, 100, "Specialty");
+            product[3] = new Product(4, "Mango Smoothie", 175, 100, "Smoothie");
+            product[4] = new Product(5, "Mango Pineapple", 160, 100, "Smoothie");
+            product[5] = new Product(6, "Four seasons", 100, 100, "Juice");
+            product[6] = new Product(7, "Strawberry Kiwi", 120, 100, "Juice");
+            product[7] = new Product(8, "Sweet Melon", 130, 100, "Juice");
         }
 
         int cartLimit = 5;
@@ -48,11 +48,11 @@ class Program
                     if (cartCount == 0) { Console.WriteLine("Cart is Empty, try again!"); continue; }
 
                     double originalTotal = 0;
-                    for (int i = 0; i < cartCount; i++) originalTotal += cart[i].Subtotal;
+                    for (int i = 0; i < cartCount; i++) originalTotal += cart[i].GetSubtotaL();
                     double discountAmount = originalTotal >= 5000 ? 0.10 * originalTotal : 0;
                     double finalTotal = originalTotal - discountAmount;
 
-                    Console.WriteLine($"GRAND TOTAL: {finalTotal:N2}");
+                    Console.WriteLine($"\nTOTAL AMOUNT DUE (after discount if applicable): ₱{finalTotal:N2}");
 
                     double pay = 0;
 
@@ -79,7 +79,7 @@ class Program
                     Console.WriteLine("----------------------------------------");
                     Console.WriteLine($"{"ITEM",-20} {"QTY",5} {"SUBTOTAL",10}");
                     for (int i = 0; i < cartCount; i++)
-                        Console.WriteLine($"{cart[i].Name,-20} {cart[i].Quantity,5} ₱{cart[i].Subtotal,10:N2}");
+                        Console.WriteLine($"{cart[i].GetName(),-20} {cart[i].GetQuantity(),5} ₱{cart[i].GetSubtotaL(),10:N2}");
 
                     Console.WriteLine("----------------------------------------");
                     Console.WriteLine($"Grand Total:   ₱ {originalTotal,10:N2}");
@@ -103,14 +103,14 @@ class Program
 
                     foreach (var p in product)
                     {
-                        if (p != null && p.RemainingStock <= 5)
+                        if (p != null && p.GetRemainingStock() <= 5)
                         {
                             if (!hasLowStock)
                             {
                                 Console.WriteLine("\n--- LOW STOCK ALERT ---");
                                 hasLowStock = true;
                             }
-                            Console.WriteLine($"ALERT: {p.Name} has only {p.RemainingStock} left! Sorry :(");
+                            Console.WriteLine($"ALERT: {p.GetName()} has only {p.GetRemainingStock()} left! Sorry :(");
                         }
                     }
 
@@ -142,7 +142,7 @@ class Program
 
                     foreach (var p in product)
                     {
-                        if (p != null && p.Name.ToLower().Contains(key))
+                        if (p != null && p.GetName().ToLower().Contains(key))
                         {
                             p.DisplayProduct();
                             found = true; // 2. Mark as true if a match exists
@@ -168,7 +168,7 @@ class Program
 
                         foreach (var p in product)
                         {
-                            if (p != null && p.Category == catg)
+                            if (p != null && p.GetCategory() == catg)
                             {
                                 p.DisplayProduct();
                             }
@@ -190,44 +190,40 @@ class Program
                 }
                 else if (choice >= 1 && choice <= 8) // Buy Logic
                 {
-                    Product sel = Array.Find(product, p => p != null && p.Id == choice);
+                    Product sel = Array.Find(product, p => p != null && p.GetId() == choice);
                     if (sel != null)
                     {
-                        Console.Write($"Enter quantity for {sel.Name}: ");
+                        Console.Write($"Enter quantity for {sel.GetName()}: ");
                         if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0)
                         {
                             if (sel.HasEnoughStock(quantity))
                             {
-                                CartItem exist = Array.Find(cart, c => c != null && c.Name == sel.Name);
+                                CartItem exist = Array.Find(cart, c => c != null && c.GetName() == sel.GetName());
                                 if (exist != null)
                                 {
-                                    exist.Quantity += quantity;
-                                    exist.Subtotal = sel.GetItemTotal(exist.Quantity);
+                                    exist.SetQuantity(exist.GetQuantity() + quantity);
+                                    exist.SetSubtotal(sel.GetItemTotal(exist.GetQuantity()));
                                     sel.DeductStock(quantity);
                                     Console.WriteLine("Added more to existing item.");
                                 }
                                 else if (cartCount < cartLimit)
                                 {
-                                    cart[cartCount] = new CartItem
-                                    {
-                                        Name = sel.Name,
-                                        Price = (int)sel.Price,
-                                        Quantity = quantity,
-                                        Subtotal = sel.GetItemTotal(quantity)
-                                    };
-
-                                    cartCount++;
-                                    sel.DeductStock(quantity);
-                                    Console.WriteLine("Added to cart.");
+                                    cart[cartCount] = new CartItem();
+                                    
+                                        cart[cartCount] = new CartItem();
+                                        cart[cartCount].SetName(sel.GetName());
+                                        cart[cartCount].SetPrice(sel.GetPrice());
+                                        cart[cartCount].SetQuantity(quantity);
+                                        cart[cartCount].SetSubtotal(sel.GetItemTotal(quantity));
+                                        cartCount++;
+                            
                                 }
-                                else
-                                {
-                                    Console.WriteLine("Cart is full (Limit: 5 types of items).");
-                                }
+                                sel.DeductStock(quantity);
+                                Console.WriteLine("Added to cart.");
                             }
                             else
                             {
-                                Console.WriteLine($"Insufficient stock! Only {sel.RemainingStock} left.");
+                                Console.WriteLine($"Insufficient stock! Only {sel.GetRemainingStock()} left.");
                             }
                         }
                         else
@@ -255,7 +251,7 @@ class Program
         while (true)
         {
             Console.WriteLine("\n--- Manage Cart ---");
-            for (int i = 0; i < count; i++) Console.WriteLine($"[{i + 1}] {cart[i].Name} x {cart[i].Quantity}");
+            for (int i = 0; i < count; i++) Console.WriteLine($"[{i + 1}] {cart[i].GetName()} x {cart[i].GetQuantity()}");
             Console.WriteLine("1. View Cart | 2. Remove | 3. Update Quantity | 4. Clear Cart | 5. Back");
             Console.Write("Choice: ");
             string op = Console.ReadLine();
@@ -264,21 +260,21 @@ class Program
             {
                 Console.WriteLine("\n---Your Cart---");
                 for (int i = 0; i < count; i++)
-                    Console.WriteLine($"{cart[i].Name} x {cart[i].Quantity} = ₱{cart[i].Subtotal:N2}");
+                    Console.WriteLine($"{cart[i].GetName()} x {cart[i].GetQuantity()} = ₱{cart[i].GetSubtotaL():N2}");
             }
             else if (op == "2") // Remove Item
             {
                 Console.Write("Enter item number to remove: ");
                 if (int.TryParse(Console.ReadLine(), out int rem) && rem > 0 && rem <= count)
                 {
-                    string itemToRemoveName = cart[rem - 1].Name;
-                    int qtyToReturn = cart[rem - 1].Quantity;
+                    string itemToRemoveName = cart[rem - 1].GetName();
+                    int qtyToReturn = cart[rem - 1].GetQuantity();
 
-                    Product p = Array.Find(products, prod => prod.Name == itemToRemoveName);
+                    Product p = Array.Find(products, prod => prod.GetName() == itemToRemoveName);
 
                     if (p != null)
                     {
-                        p.RemainingStock += qtyToReturn;
+                        p.SetremainingStock(p.GetRemainingStock() + qtyToReturn);
                     }
 
                     for (int i = rem - 1; i < count - 1; i++)
@@ -297,26 +293,26 @@ class Program
                 if (int.TryParse(Console.ReadLine(), out int upd) && upd > 0 && upd <= count)
                 {
                     CartItem item = cart[upd - 1];
-                    Product prod = Array.Find(products, p => p.Name == item.Name);
+                    Product prod = Array.Find(products, p => p.GetName() == item.GetName());
                     if (prod != null)
                     {
-                        Console.Write($"Enter new quantity for {item.Name}: ");
+                        Console.Write($"Enter new quantity for {item.GetName()}: ");
                         if (int.TryParse(Console.ReadLine(), out int newQty) && newQty >= 0)
                         {
-                            int diff = newQty - item.Quantity;
+                            int diff = newQty - item.GetQuantity();
                             if (diff == 0) continue;
                             else if (diff > 0 && prod.HasEnoughStock(diff))
                             {
-                                item.Quantity = newQty;
-                                item.Subtotal = prod.GetItemTotal(newQty);
+                                item.SetQuantity(newQty);
+                                item.SetSubtotal(prod.GetItemTotal(newQty));
                                 prod.DeductStock(diff);
                                 Console.WriteLine("Quantity updated.");
                             }
                             else if (diff < 0)
                             {
-                                item.Quantity = newQty;
-                                item.Subtotal = prod.GetItemTotal(newQty);
-                                prod.RemainingStock += (-diff);
+                                item.SetQuantity(newQty);
+                                item.SetSubtotal(prod.GetItemTotal(newQty));
+                                prod.SetremainingStock(prod.GetRemainingStock() + (-diff));
                                 Console.WriteLine("Quantity updated.");
                             }
                             else Console.WriteLine("Not enough stock available.");
@@ -326,17 +322,17 @@ class Program
                 }
                 else Console.WriteLine("Invalid input, try again");
             }
-            else if (op == "4")
+            else if (op == "4") // Clear Cart
             {
                 for (int i = 0; i < count; i++)
                 {
-                    string currentItemName = cart[i].Name;
-                    int currentItemQty = cart[i].Quantity;
+                    string currentItemName = cart[i].GetName();
+                    int currentItemQty = cart[i].GetQuantity();
 
-                    var p = Array.Find(products, prod => prod.Name == currentItemName);
+                    var p = Array.Find(products, prod => prod.GetName() == currentItemName);
                     if (p != null)
                     {
-                        p.RemainingStock += currentItemQty;
+                        p.SetremainingStock(p.GetRemainingStock() + currentItemQty);
                     }
                 }
                 Array.Clear(cart, 0, cart.Length);
