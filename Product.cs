@@ -8,12 +8,20 @@ using System.Transactions;
 
 namespace Olivarez_Mary_Joy_ShoppingCartActivity
 {
-    // Product Class
-    public class Product
+    // Parent Class
+    public class BaseItem
+    {
+        protected string Name;
+        protected double Price;
+
+        public string GetName() => Name;
+        public double GetPrice() => Price;
+    }
+
+    // Child Class
+    public class Product : BaseItem
     {
         private readonly int Id;
-        private readonly string Name = string.Empty;
-        private readonly double Price;
         private int RemainingStock;
         private readonly string category;
 
@@ -22,22 +30,19 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
         public Product (int Id, string Name, double Price, int Stock, string Category)
         {
             this.Id = Id;
-            this.Name = Name;
-            this.Price = Price;
+            this.Name = Name; // inherited
+            this.Price = Price; // inherited
             this.RemainingStock = Stock;
             this.category = Category;
         }
 
         // Setters
-        public void SetremainingStock(int stock) { this.RemainingStock = stock; }
+        public void SetremainingStock(int newStock) => RemainingStock = newStock;
 
         // Getters 
-        public int GetId() { return this.Id; }
-        public string GetName() { return this.Name; }
-
-        public double GetPrice() { return this.Price; }
-        public int GetRemainingStock() { return this.RemainingStock; }
-        public string GetCategory() { return this.category; }
+        public int GetId() => Id;
+        public int GetRemainingStock() => RemainingStock;
+        public string GetCategory() => category;
 
         // Display Product 
         public void DisplayProduct() =>
@@ -54,10 +59,8 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
     }
 
     // CartItem Class
-    public class CartItem
+    public class CartItem : BaseItem
     {
-        private string Name;
-        private double Price;
         private int Quantity;
         private double Subtotal;
 
@@ -69,11 +72,8 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
         public void SetSubtotal(double subtotal) { this.Subtotal = subtotal; }
 
         // Getters
-
-        public string GetName() { return this.Name; }
-        public int GetQuantity() { return this.Quantity; }
-        public double GetPrice() { return this.Price; }
-        public double GetSubtotaL () { return this.Subtotal; }
+        public int GetQuantity() => Quantity;
+        public double GetSubtotaL () => Subtotal;
 
     }
 } 
