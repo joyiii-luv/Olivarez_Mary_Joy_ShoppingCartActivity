@@ -11,11 +11,11 @@ namespace Olivarez_Mary_Joy_ShoppingCartActivity
     // Product Class
     public class Product
     {
-        private int Id;
-        private string Name;
-        private double Price;
+        private readonly int Id;
+        private readonly string Name = string.Empty;
+        private readonly double Price;
         private int RemainingStock;
-        private string category;
+        private readonly string category;
 
 
         // Constructor

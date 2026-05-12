@@ -9,7 +9,7 @@ class Program
     static string[] orderHistory = new string[100];
     static int historyCount = 0;
     static int receiptCounter = 1;
-    static void Main(string[] args )
+    static void Main()
     {
         //To add Peso Sign*
         Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -52,7 +52,7 @@ class Program
                     double discountAmount = originalTotal >= 5000 ? 0.10 * originalTotal : 0;
                     double finalTotal = originalTotal - discountAmount;
 
-                    Console.WriteLine($"GRAND TOTAL: {finalTotal:N2}");
+                    Console.WriteLine($"\nTOTAL AMOUNT DUE (after discount if applicable): ₱{finalTotal:N2}");
 
                     double pay = 0;
 
